@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/mespinet'
+let g:netrw_dirhist_2='/Users/mespinet/.config'
+let g:netrw_dirhist_3='/Users/mespinet/.config/nvim'
+let g:netrw_dirhist_4='/Users/mespinet/.config/nvim/autoload'
+let g:netrw_dirhist_5='/Users/mespinet/.config/nvim'
+let g:netrw_dirhist_6='/Users/mespinet'

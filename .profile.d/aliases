@@ -1,0 +1,6 @@
+# For a full list of active aliases, run `alias`.
+alias config='/usr/bin/git --git-dir=/Users/mespinet/.config/ --work-tree=/Users/mespinet' # dotfile git management
+alias ls='ls -al'
+alias vim='nvim' # use neovim over vim
+alias config='/usr/bin/git --git-dir=/Users/mespinet/.dotfiles/ --work-tree=/Users/mespinet'
+alias ssh-mespinet='mosh mespinet.vm.ny5.etsy.com'

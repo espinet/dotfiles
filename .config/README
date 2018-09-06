@@ -1,0 +1,11 @@
+## Environment installation
+1) dotfiles.sh # Installing dotfiles on to new system
+2) brew bundle # Download all homebrew bundles
+3) pip3 install neovim # install python for vim plugin deoplete
+4) pip3 install fonttools # For Operator Mono font
+4) :PlugInstall (in nvim)
+5) set up ssh keys
+
+
+## FONTS
+# Operator Mono + Alacritty + tmux (https://github.com/jwilm/alacritty/issues/489)
