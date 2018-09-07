@@ -1,0 +1,87 @@
+#!/bin/sh
+
+for file in ~/.profile.d/*
+do
+  source $file
+done
+
+get_os() {
+  uname_out="$(uname -s)"
+  case $uname_out in
+      Linux*)     machine=Linux;;
+      Darwin*)    machine=Mac;;
+      CYGWIN*)    machine=Cygwin;;
+      MINGW*)     machine=MinGw;;
+      *)          machine="UNKNOWN:${uname_out}"
+  esac
+  echo $machine
+}
+
+homebrew_install() {
+  case $(get_os) in
+    Mac)    homebrew_mac_install;;
+    Linux)  homebrew_linux_install;;
+  esac
+  brew bundle
+}
+
+homebrew_mac_install() {
+  if ! command -v brew; then
+    echo "Installing Homebrew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+}
+
+homebrew_linux_install() {
+  if ! command -v brew; then
+    echo "Installing Linuxbrew..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+  fi
+}
+
+initialize_dotfiles() {
+  if [ ! -d ~/.dotfiles ]; then
+    echo "Installing dotfiles..."
+    ./dotfiles.sh
+  fi
+}
+
+shell_interactive_zsh() {
+  echo "Setting zsh as interactive shell..."
+  chsh -s $(which zsh)
+}
+
+shell_noninteractive_dash() {
+  symlink="$(dirname $(which brew))/sh"
+  echo $symlink
+  if [ ! -f $symlink ]; then
+    echo "Overriding sh with dash..."
+    ln -sf dash $symlink
+  fi
+}
+
+tmux_manager() {
+  if [ ! -d ~/.tmux/lplugins/tpm ]; then
+    echo "Installing tmux plugin manager..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+  tmux new -s plugin-install -d
+  ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+  tmux kill-session
+}
+
+vim_plug() {
+  if [ ! -f ~/.config/nvim/autoload/plug.vim ]; then
+    echo "Installing vim plug..."
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+  vim +PlugClean +qall
+  vim +PlugInstall +qall
+}
+
+homebrew_install
+initialize_dotfiles
+shell_interactive_zsh
+shell_noninteractive_dash
+vim_plug
+tmux_manager
