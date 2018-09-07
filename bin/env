@@ -37,7 +37,7 @@ homebrew_linux_install() {
 initialize_dotfiles() {
   if [ ! -d ~/.dotfiles ]; then
     echo "Installing dotfiles..."
-    ./dotfiles
+    sh <(curl -s https://raw.githubusercontent.com/espinet/dotfiles/master/bin/dotfiles)
   fi
 
   for file in ~/.profile.d/*
