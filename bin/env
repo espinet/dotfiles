@@ -1,10 +1,5 @@
 #!/bin/sh
 
-for file in ~/.profile.d/*
-do
-  source $file
-done
-
 get_os() {
   uname_out="$(uname -s)"
   case $uname_out in
@@ -44,6 +39,11 @@ initialize_dotfiles() {
     echo "Installing dotfiles..."
     ./dotfiles.sh
   fi
+
+  for file in ~/.profile.d/*
+  do
+    source $file
+  done
 }
 
 shell_interactive_zsh() {
