@@ -19,8 +19,8 @@ let g:enable_numbers = 1
 let g:numbers_exclude = ['tagbar','nerdtree']
 
 Plug 'Lokaltog/vim-easymotion'
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <leader>f <Plug>(easymotion-bd-f)
+nmap <leader>f <Plug>(easymotion-overwin-f)
 
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_eager = 0
